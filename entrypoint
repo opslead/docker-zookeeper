@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "tickTime=$ZOOKEEPER_TICK_TIME" >> /opt/zookeeper/zoo.cfg
+echo "initLimit=$ZOOKEEPER_INIT_LIMIT" >> /opt/zookeeper/zoo.cfg
+echo "syncLimit=$ZOOKEEPER_SYNC_LIMIT" >> /opt/zookeeper/zoo.cfg
+echo "clientPort=$ZOOKEEPER_CLIENT_PORT" >> /opt/zookeeper/zoo.cfg
+
+echo "dataDir=/opt/zookeeper/data" >> /opt/zookeeper/zoo.cfg
+
+exec java ${JAVA_ARGS} \
+    -Dcom.sun.management.jmxremote \
+    -Dcom.sun.management.jmxremote.local.only=false \
+    -classpath .:/opt/zookeeper/lib/* \
+    org.apache.zookeeper.server.quorum.QuorumPeerMain /opt/zookeeper/zoo.cfg
