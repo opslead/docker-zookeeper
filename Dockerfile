@@ -10,7 +10,7 @@ ENV ZOOKEEPER_USER="zookeeper" \
     ZOOKEEPER_GROUP="zookeeper" \
     ZOOKEEPER_GID="8983" \
     ZOOKEEPER_VERSION="3.9.1" \
-    ZOOKEEPER_DIST_URL="https://dlcdn.apache.org/zookeeper/zookeeper-3.9.1/apache-zookeeper-3.9.1-bin.tar.gz"
+    ZOOKEEPER_DIST_URL="https://dlcdn.apache.org/zookeeper/zookeeper-$ZOOKEEPER_VERSION/apache-zookeeper-$ZOOKEEPER_VERSION-bin.tar.gz"
 
 ENV ZOOKEEPER_TICK_TIME=2000 \
     ZOOKEEPER_INIT_LIMIT=10 \
@@ -25,9 +25,10 @@ RUN curl -L $ZOOKEEPER_DIST_URL --output /tmp/apache-zookeeper.tar.gz; \
     rm /tmp/apache-zookeeper.tar.gz; \
     mv /tmp/apache-zookeeper-* /tmp/zookeeper; \
     mv /tmp/zookeeper/lib /opt/zookeeper/; \
-    rm -rf /opt/zookeeper/lib/*.txt; \
+    rm -rf /opt/zookeeper/lib/*.txt /tmp/*;  \
     mkdir -p /opt/zookeeper/data; \
-    chown $ZOOKEEPER_USER:$ZOOKEEPER_GROUP -R /opt/zookeeper
+    chown $ZOOKEEPER_USER:$ZOOKEEPER_GROUP -R /opt/zookeeper; \
+    apt-get clean
 
 COPY entrypoint /opt/zookeeper
 COPY logback.xml /opt/zookeeper
