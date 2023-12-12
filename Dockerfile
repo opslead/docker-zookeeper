@@ -9,7 +9,6 @@ ENV ZOOKEEPER_USER="zookeeper" \
     ZOOKEEPER_UID="8983" \
     ZOOKEEPER_GROUP="zookeeper" \
     ZOOKEEPER_GID="8983" \
-    ZOOKEEPER_VERSION="3.9.1" \
     ZOOKEEPER_TICK_TIME=2000 \
     ZOOKEEPER_INIT_LIMIT=10 \
     ZOOKEEPER_SYNC_LIMIT=5 \
@@ -20,7 +19,7 @@ RUN useradd -r --uid "$ZOOKEEPER_UID" --gid "$ZOOKEEPER_GID" "$ZOOKEEPER_USER"
 
 RUN apt-get update && \
     apt-get -y install curl && \
-    curl -L https://dlcdn.apache.org/zookeeper/zookeeper-$ZOOKEEPER_VERSION/apache-zookeeper-$ZOOKEEPER_VERSION-bin.tar.gz --output /tmp/apache-zookeeper.tar.gz && \
+    curl -f -L https://dlcdn.apache.org/zookeeper/zookeeper-$ZOOKEEPER_VERSION/apache-zookeeper-$ZOOKEEPER_VERSION-bin.tar.gz --output /tmp/apache-zookeeper.tar.gz && \
     tar -C /tmp --extract --file /tmp/apache-zookeeper.tar.gz && \
     rm /tmp/apache-zookeeper.tar.gz && \
     mv /tmp/apache-zookeeper-* /tmp/zookeeper && \
