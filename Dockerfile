@@ -3,6 +3,8 @@ FROM azul/zulu-openjdk:11
 LABEL maintainer="opslead"
 LABEL repository="https://github.com/opslead/docker-zookeeper"
 
+ARG ZOOKEEPER_VERSION
+
 WORKDIR /opt/zookeeper
 
 ENV ZOOKEEPER_USER="zookeeper" \
