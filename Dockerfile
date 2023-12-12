@@ -18,8 +18,7 @@ ENV ZOOKEEPER_USER="zookeeper" \
 RUN groupadd -r --gid "$ZOOKEEPER_GID" "$ZOOKEEPER_GROUP"
 RUN useradd -r --uid "$ZOOKEEPER_UID" --gid "$ZOOKEEPER_GID" "$ZOOKEEPER_USER"
 
-RUN apt-get -y update && apt-get -y install curl
-RUN apt-get -y update && \
+RUN apt-get update && \
     apt-get -y install curl && \
     curl -L https://dlcdn.apache.org/zookeeper/zookeeper-$ZOOKEEPER_VERSION/apache-zookeeper-$ZOOKEEPER_VERSION-bin.tar.gz --output /tmp/apache-zookeeper.tar.gz && \
     tar -C /tmp --extract --file /tmp/apache-zookeeper.tar.gz && \
