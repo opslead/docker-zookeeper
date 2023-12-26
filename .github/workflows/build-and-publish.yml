@@ -1,10 +1,8 @@
 name: Build and Publish
 
 on:
-  workflow_dispatch:
   push:
     branches: [main]
-  pull_request:
 
 env:
   ZOOKEEPER_VERSION: 3.9.1
@@ -38,7 +36,7 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/zookeeper:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/zookeeper:${{ env.ZOOKEEPER_VERSION }}
-          push: ${{ github.ref == 'refs/heads/main' }}
+          push: true
 
       - name: Update repo description
         uses: peter-evans/dockerhub-description@v3
